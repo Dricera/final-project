@@ -1,8 +1,8 @@
-# API Backend for Academic Major Project
+# Major Project
 ---
 This repository is intended to document the development of the project and its libraries with the project collaborators' contributions open and visible to the public.
 
-## Project Contributors refer below steps to get started
+## Project Contributors refer below steps to get started with **Backend** development
 
 ---
 
@@ -20,6 +20,7 @@ This repository is intended to document the development of the project and its l
 - clone this repository and open workspace in VSCode
 - run:
 	```cmd
+  cd backend
    dotnet restore
 	```
 - Once succesfully restored, launch the debug session with
