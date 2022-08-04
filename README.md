@@ -1,1 +1,1 @@
-# project.backend
+# project-backend
