@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <!-- <Nullable>enable</Nullable> Enabling causes default get behavior to trip null safety-->
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>project_backend</RootNamespace>
+    <RootNamespace>backend</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
