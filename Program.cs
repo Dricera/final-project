@@ -1,4 +1,4 @@
-namespace project-backend
+namespace backend
 {
 	public class Program
     {
