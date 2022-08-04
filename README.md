@@ -34,6 +34,7 @@ This repository is intended to document the development of the project and its l
 
   dotnet dev-certs https --trust
   ```
+- For contributions create a branch with git and generate a pull request with major code milestones 
 
 ## Roadmap
 - Implement user API
