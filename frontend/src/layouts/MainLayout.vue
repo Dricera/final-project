@@ -1,6 +1,14 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+  <q-layout
+    view="hHh Lpr ffr"
+    dark
+  >
+    <q-header
+      elevated
+      reveal
+      class="bg-primary"
+      height-hint="98"
+    >
       <q-toolbar>
         <q-btn
           flat
@@ -11,12 +19,26 @@
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title>
-          Quasar App
+        <q-toolbar-title align="center">
+          Work in Progress shhh
         </q-toolbar-title>
 
         <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
+      <q-tabs align="justify">
+        <q-route-tab
+          to="/home"
+          label="Page One"
+        />
+        <q-route-tab
+          to="/dashboard"
+          label="Page two"
+        />
+        <q-route-tab
+          to="/404"
+          label="Page three"
+        />
+      </q-tabs>
     </q-header>
 
     <q-drawer
@@ -63,28 +85,10 @@ const linksList = [
     link: 'https://github.com/quasarframework'
   },
   {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
     title: 'Forum',
     caption: 'forum.quasar.dev',
     icon: 'record_voice_over',
     link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
   },
   {
     title: 'Quasar Awesome',
