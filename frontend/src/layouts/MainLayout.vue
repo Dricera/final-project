@@ -1,6 +1,6 @@
 <template>
   <q-layout
-    view="hHh Lpr ffr"
+    view="lHh LpR lfr"
     dark
   >
     <q-header
@@ -64,6 +64,21 @@
     <q-page-container>
       <router-view />
     </q-page-container>
+
+    <q-footer
+      reveal
+      bordered
+      class="bg-grey-8 text-white"
+    >
+      <q-toolbar>
+        <q-toolbar-title>
+          <q-avatar>
+            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
+          </q-avatar>
+          Made with 💚 and jank code
+        </q-toolbar-title>
+      </q-toolbar>
+    </q-footer>
   </q-layout>
 </template>
 
@@ -79,16 +94,16 @@ const linksList = [
     link: 'https://quasar.dev'
   },
   {
-    title: 'Github',
+    title: 'Project Github',
+    caption: 'github.com/dricera/final-project',
+    icon: 'code',
+    link: 'https://github.com/Dricera/final-project'
+  },
+  {
+    title: 'Framework Github',
     caption: 'github.com/quasarframework',
     icon: 'code',
     link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
   },
   {
     title: 'Quasar Awesome',
