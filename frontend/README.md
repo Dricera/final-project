@@ -1,6 +1,8 @@
 # API Frontend (frontend)
+![GitHub language count](https://img.shields.io/github/languages/count/Dricera/final-project)
+![GitHub](https://img.shields.io/github/license/Dricera/final-project)
 
-API Frontend of the project, using VueJS, Vite and Quasar.
+>API Frontend of the project, using VueJS, Vite and Quasar.
 
 ## Install the dependencies
 ```bash
