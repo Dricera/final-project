@@ -17,7 +17,7 @@
     },
     "backend": {
       "commandName": "Project",
-      "launchBrowser": false,
+      "launchBrowser": true,
       "launchUrl":"api/user",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

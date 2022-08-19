@@ -14,7 +14,7 @@ namespace backend.Controllers
     public class UserController : ControllerBase
 
     {
-        private readonly IRepository _repository;
+		private readonly IRepository _repository;
         private readonly ILogger<UserController> _logger;
 
 		public UserController(IRepository repository, ILogger<UserController> logger)
@@ -33,7 +33,7 @@ namespace backend.Controllers
         } */
 
         [HttpGet]
-        public async Task<IEnumerable<ItemDto>> GetItemsAsync(string name = null)
+		public async Task<IEnumerable<ItemDto>> GetItemsAsync(string name = null)
         {
             var items = (await _repository.GetItemsAsync())
                         .Select(item => item.AsDto());

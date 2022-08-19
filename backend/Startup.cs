@@ -41,7 +41,7 @@ namespace backend
                     Title = "Backend API",
                     Description = "Initial deployment of api backend",
                 }));
-            services.AddSingleton<IRepository,MongoDbItemsRepository>();
+            services.AddSingleton<IRepository,InMemItemsRepository>();
 		}
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
