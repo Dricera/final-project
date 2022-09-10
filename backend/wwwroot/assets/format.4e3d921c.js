@@ -1,0 +1,1 @@
+import{c as u}from"./index.bdf44c73.js";const s={dark:{type:Boolean,default:null}};function l(t,e){return u(()=>t.dark===null?e.dark.isActive:t.dark)}function c(t,e,r){return r<=e?e:Math.min(r,Math.max(e,t))}function d(t,e,r){if(r<=e)return e;const n=r-e+1;let a=e+(t-e)%n;return a<e&&(a=n+a),a===0?0:a}export{l as a,c as b,d as n,s as u};
