@@ -18,6 +18,20 @@ namespace backend
 		public IConfiguration Configuration { get; }
 		public void ConfigureServices(IServiceCollection services)
 		{
+			services.AddCors(options =>
+			{
+				options.AddDefaultPolicy(
+						policy =>
+						{
+							policy.WithOrigins("http://localhost:9000",
+												"https://localhost:9001")
+												.AllowAnyHeader()
+												.AllowAnyMethod();
+						});
+			});
+			// services.AddResponseCaching();
+
+
 			//MongoDB services configuration block
 			BsonSerializer.RegisterSerializer(new GuidSerializer(BsonType.String));
 			BsonSerializer.RegisterSerializer(new DateTimeOffsetSerializer(BsonType.String));
@@ -69,6 +83,9 @@ namespace backend
 			// app.UseSpaStaticFiles();
 
 			app.UseRouting();
+
+			app.UseCors();
+			
 			// app.UseAuthorization();
 			app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 

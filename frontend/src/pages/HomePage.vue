@@ -12,12 +12,13 @@ import HelloWorld from '../components/HelloWorld.vue'
   },
   props: {}
 }; */
-
 </script>
 
 <template>
   <q-page>
-    <HelloWorld msg="Vite Home Vue" />
+    <HelloWorld
+      msg="Ticket Fetching Example"
+    />
   </q-page>
 </template>
 
