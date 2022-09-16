@@ -49,7 +49,7 @@ export default defineComponent({
   name: 'DashboardPage',
   setup () {
     return {
-      username: ref('Pratik'),
+      username: ref('Username'),
       password: ref('12345')
     }
   }
@@ -59,6 +59,6 @@ export default defineComponent({
 <style>
 
 .bg-image {
-  background-image: linear-gradient(135deg, #7028e4 0%, #e5b2ca 100%);
+  background-image: linear-gradient(125deg, #8d8d8de9 0%, #ffffff 100%);
 }
 </style>
