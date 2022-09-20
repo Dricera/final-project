@@ -20,7 +20,7 @@
         />
 
         <q-toolbar-title align="center">
-          Work in Progress shhh
+          Work in Progress 🧑‍💻
         </q-toolbar-title>
 
         <div>Quasar v{{ $q.version }}</div>
