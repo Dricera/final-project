@@ -4,10 +4,10 @@ namespace backend.Repositories
 {
     public interface IRepository
     {
-        Task<UserModel> GetItemAsync(Guid id);
-        Task<IEnumerable<UserModel>> GetItemsAsync();
-        Task CreateItemAsync(UserModel item);
-        Task UpdateItemAsync(UserModel item);
-        Task DeleteItemAsync(Guid id);
+        Task<UserModel> GetUserAsync(Guid id);
+        Task<IEnumerable<UserModel>> GetUsersAsync();
+        Task CreateUserAsync(UserModel user);
+        Task UpdateUserAsync(UserModel user);
+        Task DeleteUserAsync(Guid id);
     }
 }

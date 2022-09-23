@@ -33,70 +33,70 @@ namespace backend.Controllers
         } */
 
         [HttpGet]
-		public async Task<IEnumerable<ItemDto>> GetItemsAsync(string name = null)
+		public async Task<IEnumerable<UserDto>> GetUsersAsync(string name = null)
         {
-            var items = (await _repository.GetItemsAsync())
-                        .Select(item => item.AsDto());
+            var users = (await _repository.GetUsersAsync())
+                        .Select(user => user.AsDto());
 
             // if (!string.IsNullOrWhiteSpace(name))
             if (name=="")
             {
-                items = items.Where(item => item.name.Contains(name, StringComparison.OrdinalIgnoreCase));
+                users = users.Where(user => user.name.Contains(name, StringComparison.OrdinalIgnoreCase));
             }
-			_logger.LogInformation($"{DateTime.UtcNow.ToString("hh:mm:ss")}: Retrieved {items.Count()} items");
+			_logger.LogInformation($"{DateTime.UtcNow.ToString("hh:mm:ss")}: Retrieved {users.Count()} users");
 
-            return items;
+            return users;
         }
 
         //GET /api/user/{id}
         [HttpGet("{id}", Name = "User")]
-        public async Task <ActionResult<ItemDto>> GetItemAsync(Guid id)
+        public async Task <ActionResult<UserDto>> GetUserAsync(Guid id)
         {
-            var item=await _repository.GetItemAsync(id);
+            var user=await _repository.GetUserAsync(id);
 
-            if (item is null)
+            if (user is null)
             {
                 return NotFound();
             }
             
-            return item.AsDto();
+            return user.AsDto();
         }
 
         //POST /api/user/
         [HttpPost]
-        public async Task<ActionResult<ItemDto>> PostItem(CreateItemDto itemDto)
+        public async Task<ActionResult<UserDto>> PostUser(CreateUserDto userDto)
         {
-            UserModel item = new()
+            UserModel user = new()
             {
                 id = Guid.NewGuid(),
-                name = itemDto.name,
-                role = itemDto.role,
+                name = userDto.name,
+                role = userDto.role,
                 CreatedDate = DateTimeOffset.UtcNow
             };
-            await _repository.CreateItemAsync(item);
+            await _repository.CreateUserAsync(user);
 
-            return CreatedAtAction(nameof(GetItemAsync), new { id = item.id }, item.AsDto());
+            return CreatedAtAction(nameof(GetUserAsync), new { id = user.id }, user.AsDto());
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteItem(Guid id)
+        public async Task<ActionResult> DeleteUser(Guid id)
         {
-            var existingItem = await _repository.GetItemAsync(id);
-            if (existingItem == null)
+            var existingUser = await _repository.GetUserAsync(id);
+            if (existingUser == null)
             {
                 return NotFound();
             }
 
-			await _repository.DeleteItemAsync(id);
+			await _repository.DeleteUserAsync(id);
 
 			return NoContent();
         }
 
 /*
         [HttpPut("{id}")]
-        public async Task<ActionResult<ItemDto>> PutItem(int id, ItemDto item)
+        public async Task<ActionResult<UserDto>> PutUser(int id, UserDto user)
         {
-            if (id != item.id)
+            if (id != user.id)
             {
                 return BadRequest();
             }
@@ -107,9 +107,9 @@ namespace backend.Controllers
 
 
 
-        private bool ItemExists(int id)
+        private bool UserExists(int id)
         {
-            return _context.TodoItems.Any(e => e.Id == id);
+            return _context.TodoUsers.Any(e => e.Id == id);
         }
             */
 

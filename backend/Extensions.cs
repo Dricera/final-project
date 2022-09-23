@@ -5,9 +5,9 @@ namespace backend{
 
     public static class Extensions
     {
-        public static ItemDto AsDto(this UserModel item)
+        public static UserDto AsDto(this UserModel user)
         {
-            return new ItemDto(item.id, item.name,item.role, item.CreatedDate);
+            return new UserDto(user.id, user.name,user.role, user.CreatedDate);
         }
         public static TicketDto ToDto(this TicketModel ticket)
         {

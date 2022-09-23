@@ -64,7 +64,7 @@ namespace backend
 					Type = SecuritySchemeType.ApiKey
 				});
 			});
-			services.AddSingleton<IRepository, InMemItemsRepository>();
+			services.AddSingleton<IRepository, InMemUserRepository>();
 			services.AddSingleton<TicketRepository, InMemTicketRepository>();
 		}
 
