@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 
 defineProps({
+  // eslint-disable-next-line vue/require-default-prop
   msg: String
 })
 
