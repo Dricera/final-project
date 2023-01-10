@@ -15,7 +15,7 @@ node_modules
 # Capacitor related directories and files
 /src-capacitor/www
 /src-capacitor/node_modules
-
+/wwwroot
 # Log files
 npm-debug.log*
 yarn-debug.log*
