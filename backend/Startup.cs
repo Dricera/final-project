@@ -1,6 +1,5 @@
 using backend.Repositories;
 using backend.Settings;
-using Catalog.Api.Repositories;
 using Microsoft.OpenApi.Models;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
@@ -64,7 +63,7 @@ namespace backend
 					Type = SecuritySchemeType.ApiKey
 				});
 			});
-			services.AddSingleton<IRepository, InMemUserRepository>();
+			// services.AddSingleton<IRepository, InMemUserRepository>(); DELETED FOR NOW
 			services.AddSingleton<TicketRepository, InMemTicketRepository>();
 		}
 
