@@ -29,7 +29,7 @@ public class TicketController : ControllerBase
 		// if (!string.IsNullOrWhiteSpace(name))
 		if (name == "")
 		{
-			tickets = tickets.Where(ticket => ticket.Title.Contains(name, StringComparison.OrdinalIgnoreCase));
+			tickets = tickets.Where(ticket => ticket.Subject.Contains(name, StringComparison.OrdinalIgnoreCase));
 		}
 		_logger.LogInformation($"{DateTime.UtcNow.ToString("hh:mm:ss")}: Retrieved {tickets.Count()} tickets");
 
@@ -55,16 +55,29 @@ public class TicketController : ControllerBase
 	{
 		TicketModel Ticket = new()
 		{
-			TicketId = Guid.NewGuid(),
-			Title = TicketDto.Title,
+			ID = Guid.NewGuid(),
+			Subject = TicketDto.Subject,
 			Description = TicketDto.Description,
 			CreatedDate = DateTimeOffset.UtcNow
 		};
 		await _repository.CreateTicketAsync(Ticket);
 
-		return CreatedAtAction(nameof(GetTicketAsync), new { id = Ticket.TicketId }, Ticket.ToDto());
+		return CreatedAtAction(nameof(GetTicketAsync), new { id = Ticket.ID }, Ticket.ToDto());
 	}
 
+	[HttpPut("{id}")]
+	public async Task<ActionResult> UpdateTicket(Guid id, [FromBody]TicketModel ticket)
+	{
+		var existingTicket = await _repository.GetTicketAsync(id);
+		if (existingTicket == null)
+		{
+			return NotFound();
+		}
+		
+		await _repository.UpdateTicketAsync(id, ticket);
+		return Ok(existingTicket);
+	}
+	
 	[HttpDelete("{id}")]
 	public async Task<ActionResult> DeleteTicket(Guid id)
 	{

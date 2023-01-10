@@ -8,8 +8,8 @@ namespace backend.Dtos
     public record CreateUserDto([Required] string name, string role);
     public record UpdateUserDto([Required] string name, string role ); */
 
-	public record TicketDto(Guid TicketId, string Title, string Description, DateTimeOffset CreatedDate);
+	public record TicketDto(Guid ID, string Subject, string Description, DateTimeOffset CreatedDate, DateTimeOffset UpdatedDate, DateTimeOffset CompletedDate, string priority, string status);
 
-	public record CreateTicketDto([Required] string Title, string Description);
-    public record UpdateTicketDto([Required] string Title, string Description);
+	public record CreateTicketDto([Required] string Subject, string Description);
+	public record UpdateTicketDto([Required] Guid ID, string Subject, string Description);
 }

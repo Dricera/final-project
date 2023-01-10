@@ -8,6 +8,6 @@ using backend.Models;
         Task<TicketModel> GetTicketAsync(Guid id);
         Task<IEnumerable<TicketModel>> GetTicketsAsync();
         Task CreateTicketAsync(TicketModel ticket);
-        Task UpdateTicketAsync(TicketModel ticket);
+        Task UpdateTicketAsync(Guid id, TicketModel ticket);
         Task DeleteTicketAsync(Guid id);
     }
