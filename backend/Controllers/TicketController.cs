@@ -65,7 +65,7 @@ public class TicketController : ControllerBase
 		return CreatedAtAction(nameof(GetTicketAsync), new { id = Ticket.ID }, Ticket.ToDto());
 	}
 
-	[HttpPut("{id}")]
+	[HttpPatch("{id}")]
 	public async Task<ActionResult> UpdateTicket(Guid id, [FromBody]TicketModel ticket)
 	{
 		var existingTicket = await _repository.GetTicketAsync(id);
