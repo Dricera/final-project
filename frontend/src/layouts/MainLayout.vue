@@ -28,15 +28,15 @@
       <q-tabs align="justify">
         <q-route-tab
           to="/home"
-          label="Page One"
+          label="List Tickets"
         />
         <q-route-tab
           to="/dashboard"
-          label="Page two"
+          label="Create Ticket"
         />
         <q-route-tab
           to="/404"
-          label="Page three"
+          label="404"
         />
       </q-tabs>
     </q-header>
