@@ -1,12 +1,11 @@
 <!-- eslint-disable vue/require-default-prop -->
 <script setup>
 import { ref } from 'vue'
-
+import CreateTicketModal from 'src/components/CreateTicketModal.vue'
 defineProps({
   msg: String
 })
 
-const count = ref(0)
 </script>
 <script>
 export default {
@@ -15,6 +14,7 @@ export default {
     return {
       // for development we point the url to the endpoint of local development server
       API_URL: 'https://localhost:5001/api/ticket',
+      showCreateTicketModal: ref(false),
       fetched: []
       // initialze data component for fetching and populating the table
     }
@@ -23,6 +23,9 @@ export default {
     this.fetchData()
   },
   methods: {
+    handleClose (event) {
+      this.showCreateTicketModal = false
+    },
     // asynchronously fetch the ticket data from the API server
     async fetchData () {
       const headers = {
@@ -38,6 +41,7 @@ export default {
         .then(resp => resp.json())
       // store the api call response as JSON in local object 'payload'
       this.fetched = payload
+      console.log(ref(this.fetched))
       /*
       move the local data to the component data defined in the data() function
       this is type-sensitive, so if response is an Array the variable should be initialized in data() as array
@@ -56,25 +60,22 @@ export default {
       {{ msg }}
     </h2>
 
-    <q-chip
+    <q-btn
       icon="add"
-      clickable
-      @click="count++"
-    >
-      count is {{ count }}
-    </q-chip>
+      @click="showCreateTicketModal=true"
+    />
   </q-card>
   <q-table
     :rows="fetched"
     row-key="ticketId"
   />
+  <q-dialog
+    v-model="showCreateTicketModal"
+  >
+    <CreateTicketModal @createDone="handleClose" />
+  </q-dialog>
+
   <!-- we populate the data in the table by specifying :rows to get from data component 'fetched'
   row-key acts like a primary key and needs to be defined for future data interactions
   -->
 </template>
-
-<style scoped>
-.read-the-docs {
-  color: #888;
-}
-</style>

@@ -6,9 +6,9 @@ namespace backend.Repositories
     {
         private readonly List<TicketModel> tickets = new()
         {
-            new TicketModel { TicketId = Guid.NewGuid(), Title = "Ticket1", Description = "Ticket number one", CreatedDate = DateTimeOffset.UtcNow },
-            new TicketModel { TicketId = Guid.NewGuid(), Title = "Ticket2", Description = "Ticket number two",CreatedDate = DateTimeOffset.UtcNow },
-            new TicketModel { TicketId = Guid.NewGuid(), Title = "Ticket3",Description = "Ticket number three", CreatedDate = DateTimeOffset.UtcNow }
+            new TicketModel { ID = Guid.NewGuid(), Subject = "Ticket1", Description = "Ticket number one"},
+            new TicketModel { ID = Guid.NewGuid(), Subject = "Ticket2", Description = "Ticket number two"},
+            new TicketModel { ID = Guid.NewGuid(), Subject = "Ticket3",Description = "Ticket number three"}
         };
 
         async Task<IEnumerable<TicketModel>> TicketRepository.GetTicketsAsync()
@@ -16,9 +16,9 @@ namespace backend.Repositories
             return await Task.FromResult(tickets);	
         }
 
-        public async Task<TicketModel> GetTicketAsync(Guid TicketId)
+        public async Task<TicketModel> GetTicketAsync(Guid ID)
         {
-            var ticket = tickets.Where(ticket => ticket.TicketId == TicketId).SingleOrDefault();
+            var ticket = tickets.Where(ticket => ticket.ID == ID).SingleOrDefault();
             return await Task.FromResult(ticket);
         }
 
@@ -30,17 +30,73 @@ namespace backend.Repositories
 
         public async Task UpdateTicketAsync(TicketModel ticket)
         {
-            var index = tickets.FindIndex(existingticket => existingticket.TicketId == ticket.TicketId);
+            var index = tickets.FindIndex(existingticket => existingticket.ID == ticket.ID);
             tickets[index] = ticket;
             await Task.CompletedTask;
         }
 
-        public async Task DeleteTicketAsync(Guid TicketId)
+        public async Task UpdateTicketAsync(Guid id, TicketModel ticket)
+		{
+			var index = tickets.FindIndex(existingticket => existingticket.ID == id);
+			var foundTicket = tickets[index];
+			
+			foundTicket.Subject = ticket.Subject ?? foundTicket.Subject;
+            foundTicket.Description = ticket.Description ?? foundTicket.Description;
+
+            if(ticket.Priority.ToString().Length > 0)
+            foundTicket.Priority = ticket.Priority;
+
+			if (!foundTicket.Status.Equals("Completed"))
+			{
+				foundTicket.Status = ticket.Status;
+			}
+			// SetMatchingProperties(ticket, foundTicket);
+
+			await Task.CompletedTask;
+		}
+
+        public async Task DeleteTicketAsync(Guid ID)
         {
-            var index = tickets.FindIndex(existingticket => existingticket.TicketId == TicketId);
+            var index = tickets.FindIndex(existingticket => existingticket.ID == ID);
             tickets.RemoveAt(index);
             await Task.CompletedTask;
         }
+
+        private static void SetMatchingProperties(object source, object destination)
+		{
+			var sourceProperties = source.GetType().GetProperties();
+			var destinationProperties = destination.GetType().GetProperties();
+
+			foreach (var sourceProperty in sourceProperties)
+			{
+				var destinationProperty = destinationProperties.FirstOrDefault(x => x.Name == sourceProperty.Name);
+				if (destinationProperty == null || !destinationProperty.CanWrite)
+				{
+					continue;
+				}
+
+				var value = sourceProperty.GetValue(source);
+				if (!IsDefaultValue(value))
+				{
+					destinationProperty.SetValue(destination, value);
+				}
+			}
+		}
+		private static bool IsDefaultValue(object value)
+		{
+			if (value == null)
+			{
+				return true;
+			}
+
+			Type type = value.GetType();
+			if (type.IsValueType)
+			{
+				return value.Equals(Activator.CreateInstance(type));
+			}
+
+			return false;
+		}
 
 
 	}
