@@ -4,25 +4,43 @@
       class="q-pa-md text-white-5"
       style="width: 500px; max-width: 80vw;"
     >
-      <q-card-section>
-        <div class="text-center q-pt-lg">
-          <div class="col text-h5 ellipsis">
-            Create Ticket
-          </div>
-          <q-btn
-            v-close-popup
-            class="absolute-top-right"
-            icon="close"
-            flat
-            round
-            dense
-          />
-        </div>
-      </q-card-section>
       <q-card-section horizontal>
         <q-card-section>
+          <div class="text-center q-pt-lg">
+            <div class="col text-h5 ellipsis">
+              Create Ticket
+            </div>
+            <q-btn
+              v-close-popup
+              class="absolute-top-right"
+              icon="close"
+              flat
+              round
+              dense
+            />
+          </div>
+          <q-form
+            class="q-gutter-md"
+            @submit="createTicket"
+          >
+            <q-input
+              v-model="Text"
+              label="Employee ID"
+              standout="bg-green text-white"
+              :rules="[ val => val && val.length > 0 || 'This field is required']"
+            />
 
+            <q-input
+              v-model="Text"
+              label="Employee Name"
+              standout="bg-green text-white"
+              :rules="[ val => val && val.length > 0 || 'This field is required']"
+            />
+          </q-form>
         </q-card-section>
+
+        <q-separator vertical />
+
         <q-card-section>
           <q-form
             class="q-gutter-md"
@@ -42,7 +60,6 @@
               label="Ticket Description"
               :rules="[ val => val && val.length > 0 || 'This field is required']"
             />
-
             <div>
               <q-btn
                 class="q-px-md q-py-sm"
@@ -59,9 +76,17 @@
 </template>
 
 <script>
+import { ref } from 'vue'
 
 export default {
   emits: ['createDone'],
+  setup () {
+    return {
+      Text: ref(''),
+      ph: ref(''),
+      dense: ref(false)
+    }
+  },
   data () {
     return {
     //

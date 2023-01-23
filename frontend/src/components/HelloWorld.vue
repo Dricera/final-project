@@ -1,7 +1,8 @@
 <!-- eslint-disable vue/require-default-prop -->
 <script setup>
 import { ref } from 'vue'
-import CreateTicketModal from 'src/components/CreateTicketModal.vue'
+// import CreateTicketModal from 'src/components/CreateTicketModal.vue'
+import AreebTestCreateTicket from 'src/components/AreebTestCreateTicket.vue'
 defineProps({
   msg: String
 })
@@ -14,7 +15,7 @@ export default {
     return {
       // for development we point the url to the endpoint of local development server
       API_URL: 'https://localhost:5001/api/ticket',
-      showCreateTicketModal: ref(false),
+      showAreebTestCreateTicket: ref(false),
       fetched: []
       // initialze data component for fetching and populating the table
     }
@@ -24,7 +25,7 @@ export default {
   },
   methods: {
     handleClose (event) {
-      this.showCreateTicketModal = false
+      this.showAreebTestCreateTicket = false
     },
     // asynchronously fetch the ticket data from the API server
     async fetchData () {
@@ -62,7 +63,7 @@ export default {
 
     <q-btn
       icon="add"
-      @click="showCreateTicketModal=true"
+      @click="showAreebTestCreateTicket=true"
     />
   </q-card>
   <q-table
@@ -70,9 +71,9 @@ export default {
     row-key="ticketId"
   />
   <q-dialog
-    v-model="showCreateTicketModal"
+    v-model="showAreebTestCreateTicket"
   >
-    <CreateTicketModal @createDone="handleClose" />
+    <AreebTestCreateTicket @createDone="handleClose" />
   </q-dialog>
   <!-- we populate the data in the table by specifying :rows to get from data component 'fetched'
   row-key acts like a primary key and needs to be defined for future data interactions
