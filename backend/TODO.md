@@ -1,4 +1,4 @@
-- [ ] Implement Ticket [Endpoints](#endpoints)
+- [x] Implement Ticket [Endpoints](#endpoints)
 - [ ] Implement User Endpoints
 - [ ] Standardize the [Ticket Skeleton Object](#ticket-skeleton-object)
 - [ ] Database integration
