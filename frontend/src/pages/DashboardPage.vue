@@ -49,8 +49,8 @@ export default defineComponent({
   name: 'DashboardPage',
   setup () {
     return {
-      username: ref('Username'),
-      password: ref('12345')
+      username: ref(''),
+      password: ref('')
     }
   }
 })
