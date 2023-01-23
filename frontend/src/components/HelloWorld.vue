@@ -2,7 +2,6 @@
 <script setup>
 import { ref } from 'vue'
 import CreateTicketModal from 'src/components/CreateTicketModal.vue'
-import MLPageButtons from 'src/components/MLPageButtons.vue'
 defineProps({
   msg: String
 })
@@ -75,7 +74,6 @@ export default {
   >
     <CreateTicketModal @createDone="handleClose" />
   </q-dialog>
-  <MLPageButtons />
   <!-- we populate the data in the table by specifying :rows to get from data component 'fetched'
   row-key acts like a primary key and needs to be defined for future data interactions
   -->
