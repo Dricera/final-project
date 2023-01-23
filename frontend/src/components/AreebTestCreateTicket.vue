@@ -10,29 +10,35 @@
             <div class="col text-h5 ellipsis">
               Create Ticket
             </div>
-            <q-btn
-              v-close-popup
-              class="absolute-top-right"
-              icon="close"
-              flat
-              round
-              dense
-            />
           </div>
           <q-form
             class="q-gutter-md"
             @submit="createTicket"
           >
             <q-input
-              v-model="Text"
+              v-model="Text_e_id"
               label="Employee ID"
               standout="bg-green text-white"
               :rules="[ val => val && val.length > 0 || 'This field is required']"
             />
 
             <q-input
-              v-model="Text"
+              v-model="Text_e_name"
               label="Employee Name"
+              standout="bg-green text-white"
+              :rules="[ val => val && val.length > 0 || 'This field is required']"
+            />
+
+            <q-input
+              v-model="Text_e_dep"
+              label="Department"
+              standout="bg-green text-white"
+              :rules="[ val => val && val.length > 0 || 'This field is required']"
+            />
+
+            <q-input
+              v-model="Text_des"
+              label="Designation"
               standout="bg-green text-white"
               :rules="[ val => val && val.length > 0 || 'This field is required']"
             />
@@ -70,6 +76,14 @@
             </div>
           </q-form>
         </q-card-section>
+        <q-btn
+          v-close-popup
+          class="absolute-top-right"
+          icon="close"
+          flat
+          round
+          dense
+        />
       </q-card-section>
     </q-card>
   </div>
@@ -82,9 +96,10 @@ export default {
   emits: ['createDone'],
   setup () {
     return {
-      Text: ref(''),
-      ph: ref(''),
-      dense: ref(false)
+      Text_e_id: ref(''),
+      Text_e_name: ref(''),
+      Text_dep: ref(''),
+      Text_des: ref('')
     }
   },
   data () {
