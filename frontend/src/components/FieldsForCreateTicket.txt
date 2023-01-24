@@ -1,4 +1,0 @@
-employee id
-employee name
-department 
-designation
