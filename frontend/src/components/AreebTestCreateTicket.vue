@@ -42,6 +42,20 @@
               standout="bg-green text-white"
               :rules="[ val => val && val.length > 0 || 'This field is required']"
             />
+
+            <q-select
+              v-model="Select_type"
+              filled
+              :options="type_options"
+              label="Type"
+            />
+
+            <q-select
+              v-model="Select_priority"
+              filled
+              :options="priority_options"
+              label="Priority"
+            />
           </q-form>
         </q-card-section>
 
@@ -74,19 +88,30 @@
                 color="primary"
               />
             </div>
+            <div>
+              <q-btn
+                round
+                color=""
+                icon="shopping_cart"
+              />
+            </div>
           </q-form>
         </q-card-section>
-        <q-btn
-          v-close-popup
-          class="absolute-top-right"
-          icon="close"
-          flat
-          round
-          dense
-        />
       </q-card-section>
     </q-card>
   </div>
+  <q-form>
+    <q-card-section>
+      <q-btn
+        v-close-popup
+        class="absolute-top-right"
+        icon="close"
+        flat
+        round
+        dense
+      />
+    </q-card-section>
+  </q-form>
 </template>
 
 <script>
@@ -99,7 +124,15 @@ export default {
       Text_e_id: ref(''),
       Text_e_name: ref(''),
       Text_dep: ref(''),
-      Text_des: ref('')
+      Text_des: ref(''),
+      Select_type: ref(null),
+      type_options: [
+        '1', '2', '3', '4'
+      ],
+      Select_priority: ref(null),
+      priority_options: [
+        '1', '2', '3,', '4'
+      ]
     }
   },
   data () {
