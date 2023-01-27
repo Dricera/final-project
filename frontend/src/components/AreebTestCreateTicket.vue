@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div>
     <q-card
       class="q-pa-md text-white-5"
@@ -164,4 +164,4 @@ export default {
   }
 
 }
-</script>
+</script> -->
