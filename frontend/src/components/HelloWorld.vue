@@ -74,7 +74,6 @@ export default {
   >
     <CreateTicketModal @createDone="handleClose" />
   </q-dialog>
-
   <!-- we populate the data in the table by specifying :rows to get from data component 'fetched'
   row-key acts like a primary key and needs to be defined for future data interactions
   -->
