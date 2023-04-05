@@ -17,7 +17,6 @@ namespace backend.Models
 		public enum TicketStatus
 		{
 			Open,
-			InProgress,
 			Closed
 		}
 		private TicketStatus status;

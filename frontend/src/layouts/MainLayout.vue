@@ -30,14 +30,10 @@
           to="/home"
           label="List Tickets"
         />
-        <q-route-tab
+        <!-- <q-route-tab
           to="/dashboard"
           label="Create Ticket"
-        />
-        <q-route-tab
-          to="/404"
-          label="404"
-        />
+        /> -->
       </q-tabs>
     </q-header>
 

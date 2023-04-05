@@ -16,7 +16,7 @@ import HelloWorld from '../components/HelloWorld.vue'
 <template>
   <q-page>
     <HelloWorld
-      msg="Ticket Fetching Example"
+      msg="Ticket Interaction"
     />
   </q-page>
 </template>
