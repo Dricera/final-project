@@ -2,8 +2,6 @@
 // import { ref } from 'vue'
 
 export default {
-  name: 'REST',
-  //
   methods: {
     async getTickets () {
       const API_URL = 'https://localhost:5001/api/ticket/'
@@ -15,7 +13,6 @@ export default {
       }
       const response = await fetch(API_URL, fetchOptions)
       const respJson = await response.json()
-      console.log(respJson)
       return respJson
     },
     async deleteTicket (ticketID) {
@@ -26,9 +23,7 @@ export default {
           'Content-Type': 'application/json'
         }
       }
-      const response = await fetch(API_URL, fetchOptions)
-      await response.json()
-      console.log('Deleted ticket id: ' + ticketID)
+      await fetch(API_URL, fetchOptions)
     },
     async patchTicket (ticketID, ticketPatch) {
       const API_URL = 'https://localhost:5001/api/ticket/' + ticketID

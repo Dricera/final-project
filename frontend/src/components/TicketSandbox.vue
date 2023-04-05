@@ -3,10 +3,10 @@
 import { ref } from 'vue'
 import REST from './REST.vue'
 import CreateTicketModal from 'src/components/CreateTicketModal.vue'
+
 defineProps({
   msg: String
 })
-
 </script>
 <script>
 export default {
@@ -24,29 +24,39 @@ export default {
     this.fetchData()
   },
   methods: {
+    notify (message, type) {
+      this.$q.notify({
+        message,
+        type,
+        position: 'bottom',
+        progress: true,
+        timeout: 2000
+      })
+    },
     handleClose (event) {
       this.showCreateTicketModal = false
     },
     async deleteTicket (ticketID) {
-      // eslint-disable-next-line no-undef
+    // eslint-disable-next-line no-undef
       await REST.methods.deleteTicket(ticketID)
-      // this.fetchData()
+        .then(this.notify('Ticket Deleted', 'warning'))
     },
     // asynchronously fetch the ticket data from the API server
     async fetchData () {
-      // define the content type for the response data from the API, in this case we want to get response as JSON data
-      // Using the GET method as per the OpenAPI specification defined in https://localhost:5001/swagger
+    // define the content type for the response data from the API, in this case we want to get response as JSON data
+    // Using the GET method as per the OpenAPI specification defined in https://localhost:5001/swagger
       const payload = await REST.methods.getTickets()
+        .then(this.notify('Ticket Data Fetched', 'positive'))
       // .then(resp => resp.json())
       // store the api call response as JSON in local object 'payload'
-      this.fetched = payload
+      this.fetched = await payload
       // filter the dates to be in a more readable format
       this.fetched.forEach((ticket) => {
         ticket.createdDate = new Date(ticket.createdDate).toLocaleString()
       })
       // populate the tableData with the fetched data
       this.fetched.forEach((ticket) => {
-        // filter tableData with ticket's id, subject, description and status
+      // filter tableData with ticket's id, subject, description and status
         this.tableData.push({
           ticketId: ticket.id,
           subject: ticket.subject,
@@ -55,10 +65,6 @@ export default {
           created: ticket.createdDate
         })
       })
-
-      console.log(this.tableData)
-      // local storage fetching and storing
-      localStorage.setItem('fetched', JSON.stringify(this.fetched))
     }
   }
 }
@@ -106,6 +112,6 @@ export default {
     <CreateTicketModal @createDone="handleClose" />
   </q-dialog>
   <!-- we populate the data in the table by specifying :rows to get from data component 'fetched'
-    row-key acts like a primary key and needs to be defined for future data interactions
-    -->
+            row-key acts like a primary key and needs to be defined for future data interactions
+            -->
 </template>
