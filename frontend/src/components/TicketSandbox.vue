@@ -33,13 +33,14 @@ export default {
         timeout: 2000
       })
     },
-    handleClose (event) {
+    async handleClose (event) {
       this.showCreateTicketModal = false
+      await this.refreshTableData()
     },
     async deleteTicket (ticketID) {
-    // eslint-disable-next-line no-undef
+      // eslint-disable-next-line no-undef
       await REST.methods.deleteTicket(ticketID)
-        .then(this.notify('Ticket Deleted', 'warning'))
+        .then(() => { this.notify('Ticket Deleted', 'warning'); this.refreshTableData() })
     },
     // asynchronously fetch the ticket data from the API server
     async fetchData () {
@@ -65,6 +66,10 @@ export default {
           created: ticket.createdDate
         })
       })
+    },
+    async refreshTableData () {
+      this.tableData = []
+      this.fetchData()
     }
   }
 }
@@ -72,41 +77,55 @@ export default {
 </script>
 <template>
   <q-card>
-    <h4 class="text-grey-5 ">
+    <div class="text-h3 q-pa-md ">
       {{ msg }}
-    </h4>
-
-    <q-btn
-      icon="add"
-      label="Add Ticket"
-      color="positive"
-      @click="showCreateTicketModal = true"
-    />
+    </div>
   </q-card>
   <!-- add refresh button to q-table -->
   <q-table
+    grid
     title="Ticket List"
     :rows="tableData"
     row-key="ticketId"
   />
   <!-- add form asking for ticket id to delete ticket -->
-  <q-form>
-    <q-input
-      v-model="ticketId"
-      label="Enter Ticket ID to delete"
-      filled
-      type="text"
-    >
-      <template #after>
-        <q-btn
-          label="Delete Ticket"
-          color="negative"
-          icon="delete"
-          @click="deleteTicket(ticketId)"
-        />
-      </template>
-    </q-input>
-  </q-form>
+  <q-card>
+    <div class="q-pa-md ">
+      <q-btn
+        icon="add"
+        label="Add Ticket "
+        color="positive"
+        size="lg"
+        @click="showCreateTicketModal = true"
+      />
+    </div>
+    <div class="text-h4 q-pa-md ">
+      Delete Ticket
+    </div>
+    <q-form>
+      <q-input
+        v-model="ticketId"
+        label="Enter Ticket ID to delete"
+        filled
+        type="text"
+      >
+        <template #after>
+          <q-btn
+            label="Delete Ticket"
+            color="negative"
+            icon="delete"
+            @click="deleteTicket(ticketId)"
+          />
+          <q-btn
+            label="Refresh"
+            color="primary"
+            icon="refresh"
+            @click="refreshTableData()"
+          />
+        </template>
+      </q-input>
+    </q-form>
+  </q-card>
   <q-dialog v-model="showCreateTicketModal">
     <!-- eslint-disable-next-line vue/v-on-event-hyphenation -->
     <CreateTicketModal @createDone="handleClose" />
