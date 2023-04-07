@@ -55,14 +55,14 @@ public class TicketController : ControllerBase
 	{
 		TicketModel Ticket = new()
 		{
-			ID = Guid.NewGuid(),
+			id = Guid.NewGuid(),
 			Subject = TicketDto.Subject,
 			Description = TicketDto.Description,
 			CreatedDate = DateTimeOffset.UtcNow
 		};
 		await _repository.CreateTicketAsync(Ticket);
 
-		return CreatedAtAction(nameof(GetTicketAsync), new { id = Ticket.ID }, Ticket.ToDto());
+		return CreatedAtAction(nameof(GetTicketAsync), new { id = Ticket.id }, Ticket.ToDto());
 	}
 
 	[HttpPatch("{id}")]

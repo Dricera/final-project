@@ -1,65 +1,67 @@
-namespace backend.Models
+using MongoDB.Bson.Serialization.Attributes;
+
+namespace backend.Models;
+
+public class TicketModel
 {
-	public class TicketModel
+	private DateTimeOffset createdDate;
+	private DateTimeOffset updatedDate;
+	private DateTimeOffset completedDate;
+	[BsonId]
+	public Guid id { get; set; }
+	/* public List<TicketUser> Collaborators { get; set; }
+	public TicketUser Assignee { get; set; } */
+	public string Subject { get; set; }
+	public string Description { get; set; }
+	public DateTimeOffset CreatedDate { get => createdDate; set => createdDate = DateTimeOffset.UtcNow; }
+	public DateTimeOffset UpdatedDate { get => updatedDate; set => updatedDate = DateTimeOffset.UtcNow; }
+	public DateTimeOffset CompletedDate { get => completedDate; set => completedDate = DateTimeOffset.UtcNow; }
+
+	public enum TicketStatus
 	{
-		private DateTimeOffset createdDate;
-		private DateTimeOffset updatedDate;
-		private DateTimeOffset completedDate;
-		public Guid ID { get; set; }
-		/* public List<TicketUser> Collaborators { get; set; }
-		public TicketUser Assignee { get; set; } */
-		public string Subject { get; set; }
-		public string Description { get; set; }
-		public DateTimeOffset CreatedDate { get => createdDate; set => createdDate = DateTimeOffset.UtcNow; }
-		public DateTimeOffset UpdatedDate { get => updatedDate; set => updatedDate = DateTimeOffset.UtcNow; }
-		public DateTimeOffset CompletedDate { get => completedDate; set => completedDate = DateTimeOffset.UtcNow; }
-
-		public enum TicketStatus
+		Open,
+		Closed
+	}
+	private TicketStatus status;
+	public TicketStatus Status
+	{
+		get => status;
+		set
 		{
-			Open,
-			Closed
-		}
-		private TicketStatus status;
-		public TicketStatus Status
-		{
-			get => status;
-			set
+			status = value;
+			if (status == TicketStatus.Closed)
 			{
-				status = value;
-				if (status == TicketStatus.Closed)
-				{
-					CompletedDate = DateTimeOffset.UtcNow;
-					Console.WriteLine("Closed Ticket");
-				}
-				else
-				{
-					CompletedDate = default;
-				}
-				UpdatedDate = DateTimeOffset.UtcNow;
+				CompletedDate = DateTimeOffset.UtcNow;
+				Console.WriteLine("Closed Ticket");
 			}
-		}
-		public enum TicketPriority
-		{
-			Low = 0,
-			Medium = 1,
-			High = 2,
-			Critical = 3
-		}
-		private TicketPriority priority;
-		public TicketPriority Priority
-		{
-			get { return priority; }
-			set
+			else
 			{
-				priority = value;
-				UpdatedDate = DateTimeOffset.UtcNow;
+				CompletedDate = default;
 			}
+			UpdatedDate = DateTimeOffset.UtcNow;
 		}
-
-		public TicketModel()
+	}
+	public enum TicketPriority
+	{
+		Low = 0,
+		Medium = 1,
+		High = 2,
+		Critical = 3
+	}
+	private TicketPriority priority;
+	public TicketPriority Priority
+	{
+		get { return priority; }
+		set
 		{
-			CreatedDate = DateTime.UtcNow;
-			Status = TicketStatus.Open;
+			priority = value;
+			UpdatedDate = DateTimeOffset.UtcNow;
 		}
+	}
+
+	public TicketModel()
+	{
+		CreatedDate = DateTimeOffset.UtcNow;
+		Status = TicketStatus.Open;
 	}
 }

@@ -6,9 +6,9 @@ namespace backend.Repositories
     {
         private readonly List<TicketModel> tickets = new()
         {
-            new TicketModel { ID = Guid.NewGuid(), Subject = "Ticket1", Description = "Ticket number one"},
-            new TicketModel { ID = Guid.NewGuid(), Subject = "Ticket2", Description = "Ticket number two"},
-            new TicketModel { ID = Guid.NewGuid(), Subject = "Ticket3",Description = "Ticket number three"}
+            new TicketModel { id = Guid.NewGuid(), Subject = "Ticket1", Description = "Ticket number one"},
+            new TicketModel { id = Guid.NewGuid(), Subject = "Ticket2", Description = "Ticket number two"},
+            new TicketModel { id = Guid.NewGuid(), Subject = "Ticket3",Description = "Ticket number three"}
         };
 
         async Task<IEnumerable<TicketModel>> TicketRepository.GetTicketsAsync()
@@ -18,7 +18,7 @@ namespace backend.Repositories
 
         public async Task<TicketModel> GetTicketAsync(Guid ID)
         {
-            var ticket = tickets.Where(ticket => ticket.ID == ID).SingleOrDefault();
+            var ticket = tickets.Where(ticket => ticket.id == ID).SingleOrDefault();
             return await Task.FromResult(ticket);
         }
 
@@ -30,14 +30,14 @@ namespace backend.Repositories
 
         public async Task UpdateTicketAsync(TicketModel ticket)
         {
-            var index = tickets.FindIndex(existingticket => existingticket.ID == ticket.ID);
+            var index = tickets.FindIndex(existingticket => existingticket.id == ticket.id);
             tickets[index] = ticket;
             await Task.CompletedTask;
         }
 
         public async Task UpdateTicketAsync(Guid id, TicketModel ticket)
 		{
-			var index = tickets.FindIndex(existingticket => existingticket.ID == id);
+			var index = tickets.FindIndex(existingticket => existingticket.id == id);
 			var foundTicket = tickets[index];
 			
 			foundTicket.Subject = ticket.Subject ?? foundTicket.Subject;
@@ -57,7 +57,7 @@ namespace backend.Repositories
 
         public async Task DeleteTicketAsync(Guid ID)
         {
-            var index = tickets.FindIndex(existingticket => existingticket.ID == ID);
+            var index = tickets.FindIndex(existingticket => existingticket.id == ID);
             tickets.RemoveAt(index);
             await Task.CompletedTask;
         }

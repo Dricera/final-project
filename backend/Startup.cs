@@ -64,7 +64,7 @@ namespace backend
 				});
 			});
 			// services.AddSingleton<IRepository, InMemUserRepository>(); DELETED FOR NOW
-			services.AddSingleton<TicketRepository, InMemTicketRepository>();
+			services.AddSingleton<TicketRepository, MongoDbTicketRepository>();
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
