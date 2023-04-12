@@ -4,7 +4,7 @@
 export default {
   methods: {
     async getTickets () {
-      const API_URL = 'https://localhost:5001/api/ticket/'
+      const API_URL = "/api/ticket"
       const fetchOptions = {
         method: 'GET',
         headers: {
@@ -16,7 +16,7 @@ export default {
       return respJson
     },
     async deleteTicket (ticketID) {
-      const API_URL = 'https://localhost:5001/api/ticket/' + ticketID
+      const API_URL = "/api/ticket" +ticketID
       const fetchOptions = {
         method: 'DELETE',
         headers: {

@@ -20,7 +20,7 @@ const askQuestion = (index) => {
     // For example, if you have a project.json file that specifies the server title:
     const projectConfig = require('./project.json');
     projectConfig.serverTitle = answers.companyName;
-    const apiUrl="https://"+process.env.CODESPACE_NAME+"/api";
+    const apiUrl="https://"+process.env.CODESPACE_NAME+"/api/ticket/";
     projectConfig.apiURL=apiUrl;
     // projectConfig.logoPath = answers.companyLogo;
     fs.writeFileSync('./project.json', JSON.stringify(projectConfig, null, 2));
