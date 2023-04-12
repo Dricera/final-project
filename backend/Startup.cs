@@ -5,6 +5,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
+using Newtonsoft.Json.Linq;
 
 namespace backend
 {
@@ -15,6 +16,9 @@ namespace backend
 			Configuration = configuration;
 		}
 		public IConfiguration Configuration { get; }
+		private static string projectConfigJson = File.ReadAllText("../project.json");
+		static JObject projectConfig = JObject.Parse(projectConfigJson);
+		private string serverTitle=projectConfig["serverTitle"].ToString();
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddCors(options =>
@@ -52,7 +56,7 @@ namespace backend
 				c.SwaggerDoc("v1", new OpenApiInfo
 				{
 					Version = "v1",
-					Title = "Backend API",
+					Title = serverTitle+" API",
 					Description = "Initial deployment of api backend",
 				});
 				c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme

@@ -8,7 +8,7 @@ public class TicketModel
 	private DateTimeOffset updatedDate;
 	private DateTimeOffset completedDate;
 	[BsonId]
-	public Guid id { get; set; }
+	public Guid id { get; init; }
 	/* public List<TicketUser> Collaborators { get; set; }
 	public TicketUser Assignee { get; set; } */
 	public string Subject { get; set; }

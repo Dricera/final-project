@@ -28,7 +28,7 @@
       <q-tabs align="justify">
         <q-route-tab
           to="/home"
-          label="List Tickets"
+          label="Ticket Dashboard"
         />
         <!-- <q-route-tab
           to="/dashboard"
