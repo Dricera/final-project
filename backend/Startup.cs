@@ -39,10 +39,11 @@ namespace backend
 			BsonSerializer.RegisterSerializer(new GuidSerializer(BsonType.String));
 			BsonSerializer.RegisterSerializer(new DateTimeOffsetSerializer(BsonType.String));
 			var mongoDbSettings = Configuration.GetSection(nameof(MongoDbSettings)).Get<MongoDbSettings>();
-
 			services.AddSingleton<IMongoClient>(serviceProvider =>
 			{
-				return new MongoClient(mongoDbSettings.ConnectionString);
+				return new MongoClient(Environment.GetEnvironmentVariable("MONGODB_CONNECTION_STRING"));
+				// return new MongoClient(mongoDbSettings.ConnectionString);
+	
 			});
 			// END MongoDB service configuration
 
