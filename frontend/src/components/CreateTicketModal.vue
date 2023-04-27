@@ -76,7 +76,7 @@ export default {
   },
   methods: {
     async createTicket () {
-      const API_URL = 'https://localhost:5001/api/ticket'
+      const API_URL = '/api/ticket'
       const fetchOptions = {
         headers: {
           'Content-Type': 'application/json'
